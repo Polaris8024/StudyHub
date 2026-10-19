@@ -14,3 +14,14 @@ useState(): React Hook that manages the state.
 
 The ? means "if the condition is true," and the : means "otherwise."
 React displays only the appropriate view based on the state value.
+
+currentView: Switches between Dashboard and About
+
+tasks: Stores the task array
+
+App.jsx owns tasks and currentView state
+    Header = component
+    TaskList = recieves tasks
+        TaskItem.jsx= receives one task prop
+    About = component
+    

@@ -1,46 +1,84 @@
 import { useState } from "react";
 import "./App.css";
 
-import Header from "./components/Header"; // imports the componenet
-import About from "./components/About"; //import the about section from components
-
-
+import Header from "./components/Header";
+import About from "./components/About";
+import TaskList from "./components/TaskList";
+import TaskForm from "./components/TaskForm";
 
 function App() {
-  const appTitle = "StudyHub";
-  const appSubtitle = "Student Productivity Dashboard";
 
-  const [currentView, setCurrentView] = useState("dashboard"); //Creates state
+    const appTitle = "StudyHub";
+    const appSubtitle = "Student Productivity Dashboard";
 
-  return(
-    <div className="app">
-      <Header
-          title={appTitle}
-          subtitle={appSubtitle} //passes 2 values from App to Header.
-       />  
+    // State for switching between Dashboard and About
+    const [currentView, setCurrentView] = useState("dashboard");
 
-       <nav className="navigation">
-        <button
-          onClick={() => setCurrentView("dashboard")} //changes the state to dashboard
-          >
-            Dashboard
-          </button>
+    // State for storing tasks
+    const [tasks, setTasks] = useState([
+        {
+            id: 1,
+            title: "Finish React assignment",
+            completed: false
+        },
+        {
+            id: 2,
+            title: "Review JavaScript notes",
+            completed: true
+        },
+        {
+            id: 3,
+            title: "Submit statistics homework",
+            completed: false
+        }
+    ]);
 
-          <button
-            onClick={() => setCurrentView("about")} //changew the state to about
-            >
-              About
-            </button>
+    // Function for adding new tasks
+    function addTask(title) {
 
-       </nav>
-      <main>
+        const newTask = {
+            id: crypto.randomUUID(),
+            title: title,
+            completed: false
+        };
+
+        setTasks((previousTasks) => [
+            ...previousTasks, //spread operator. preserves the existing tasks while adding the new one. 
+            newTask
+        ]); //receives the task name from the form, creates a task object, and adds it to the existing array.
+    }
+
+    return (
+        <div className="app">
+
+            <Header
+                title={appTitle}
+                subtitle={appSubtitle}
+            />
+
+            <nav className="navigation">
+                <button
+                    type="button"
+                    onClick={() => setCurrentView("dashboard")}
+                >
+                    Dashboard
+                </button>
+
+                <button
+                    type="button"
+                    onClick={() => setCurrentView("about")}
+                >
+                    About
+                </button>
+            </nav>
+
+            <main>
                 {currentView === "dashboard" ? (
-                    <section>
-                        <h2>Welcome to StudyHub</h2>
-                        <p>
-                            Manage your tasks and track your progress.
-                        </p>
-                    </section>
+                    <>
+                        <TaskForm onAddTask={addTask} />
+
+                        <TaskList tasks={tasks} />
+                    </>
                 ) : (
                     <About />
                 )}
