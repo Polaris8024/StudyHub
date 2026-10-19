@@ -10,6 +10,7 @@ function TaskList({ tasks }) {
                     <TaskItem
                         key={task.id}
                         task={task}
+                        onToggleTask={onToggleTask}
                     />
                 );
             })}

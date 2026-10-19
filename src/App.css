@@ -224,3 +224,23 @@
     margin-bottom: 0;
     color: #555;
 }
+
+.app.dark {
+    background-color: #121820;
+    color: white;
+}
+
+.app.dark main {
+    background-color: #24303d;
+    color: white;
+}
+
+.app.dark .task-card {
+    background-color: #35475a;
+    color: white;
+}
+
+.app.dark .task-card h3,
+.app.dark .task-card p {
+    color: white;
+}

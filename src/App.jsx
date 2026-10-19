@@ -13,6 +13,7 @@ function App() {
 
     // State for switching between Dashboard and About
     const [currentView, setCurrentView] = useState("dashboard");
+    const [theme, setTheme] = useState("light");
 
     // State for storing tasks
     const [tasks, setTasks] = useState([
@@ -48,9 +49,18 @@ function App() {
         ]); //receives the task name from the form, creates a task object, and adds it to the existing array.
     }
 
-    return (
-        <div className="app">
+    function toggleTask(id) {
+    setTasks((previousTasks) =>
+        previousTasks.map((task) =>
+            task.id === id
+                ? { ...task, completed: !task.completed }
+                : task
+        )
+    );
+}
 
+    return (
+        <div className={`app ${theme}`}>
             <Header
                 title={appTitle}
                 subtitle={appSubtitle}
@@ -70,6 +80,14 @@ function App() {
                 >
                     About
                 </button>
+                <button
+    type="button"
+    onClick={() =>
+        setTheme(theme === "light" ? "dark" : "light")
+    }
+>
+    {theme === "light" ? "Dark Mode" : "Light Mode"}
+</button>
             </nav>
 
             <main>
@@ -77,7 +95,10 @@ function App() {
                     <>
                         <TaskForm onAddTask={addTask} />
 
-                        <TaskList tasks={tasks} />
+                       <TaskList
+    tasks={tasks}
+    onToggleTask={toggleTask}
+/>
                     </>
                 ) : (
                     <About />
