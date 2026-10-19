@@ -1,8 +1,8 @@
-function Header() { //create a React functional component.
+function Header({title, subtitle}) { //create a React functional component. destructuring allows access indvidual properties from the props object.
     return ( //description of the HTML-like JSX that the component displays
         <header>
-            <h1>StudyHub</h1>
-            <p>Student Productivity Dashboard</p>
+            <h1>{title}</h1>
+            <p>{subtitle}</p>
         </header>
     );
 }

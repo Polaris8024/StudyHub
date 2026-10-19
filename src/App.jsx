@@ -2,11 +2,15 @@ import "./App.css";
 import Header from "./components/Header"; // imports the componenet
 
 function App() {
+  const appTitle = "StudyHub";
+  const appSubtitle = "Student Productivity Dashboard";
 
   return(
     <div className="app">
-      <Header /> 
-
+      <Header
+          title={appTitle}
+          subtitle={appSubtitle} //passes 2 values from App to Header.
+       />  
       <main>
         <h2>Welcome to StudyHub</h2>
         <p>Manage your tasks and track your progress</p>
